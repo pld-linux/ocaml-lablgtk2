@@ -188,7 +188,8 @@ lablgtk.
 
 %description toplevel -l pl
 Wi±zania GTK+ dla OCamla. Wsparcie dla GNOME i Glade jest do³±czone.
-Pakiet ten zawiera system interaktywny OCamla zlinkowany z lablgtk.
+Pakiet ten zawiera system interaktywny OCamla skonsolidowany z
+lablgtk.
 
 %prep
 %setup -q -n lablgtk2
