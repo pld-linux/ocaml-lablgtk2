@@ -5,7 +5,7 @@
 %bcond_without gnome	# without lablgtkgnome
 %bcond_without glade	# without lablgtkglade
 
-%define _snap 20030423
+%define _snap 20030707
 
 Summary:	GTK+ binding for OCaml
 Summary(pl):	Wi±zania GTK+ dla OCamla
@@ -15,7 +15,7 @@ Release:	0.%{_snap}.1
 License:	LGPL w/ linking exceptions
 Group:		Libraries
 Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk2-%{_snap}.tar.gz
-# Source0-md5:	f20de46a7de7790e2345f18bc6759615
+# Source0-md5:	de6e511411389178e4279bceb8c1f1c2
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 BuildRequires:	gtk+2-devel
 %{?with_gl:BuildRequires:	gtkglarea-devel}
@@ -194,13 +194,11 @@ Pakiet ten zawiera system interaktywny OCamla zlinkowany z lablgtk.
 %setup -q -n lablgtk2
 
 %build
-%{__make} configure \
+%configure \
 	CC="%{__cc} %{rpmcflags} -fPIC" \
-	USE_CC=1 \
-	%{?with_gnome:USE_GNOMECANVAS=1} \
-	%{?with_glade:USE_GLADE=1} \
-	%{?with_gl:USE_GL=1} \
-	USE_RSVG=1
+	%{!?with_gnome:--without-gnomecanvas} \
+	%{!?with_glade:--without-glade} \
+	%{!?with_gl:--without-gl}
 
 %{__make} all opt \
 	LABLGLDIR=%{_libdir}/ocaml/lablgl
@@ -260,7 +258,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/glib.cm*
 %{_libdir}/ocaml/lablgtk2/gobject.cm*
 %{_libdir}/ocaml/lablgtk2/gtk.cm*
-%{_libdir}/ocaml/lablgtk2/pango.cm*
+%{_libdir}/ocaml/lablgtk2/pango*.cm*
 %{_libdir}/ocaml/lablgtk2/gtk[ABDEILMNPRSTW]*.cm*
 # hmm.. where did xml_lexer go?
 #%%{_libdir}/ocaml/lablgtk2/x*.cm*
@@ -268,6 +266,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/lablgtk.*
 %{_libdir}/ocaml/lablgtk2/liblablgtk2.*
 %attr(755,root,root) %{_libdir}/ocaml/lablgtk2/varcc
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/propcc
 %{_examplesdir}/%{name}-%{version}
 %{_libdir}/ocaml/site-lib/lablgtk2
 
@@ -325,5 +324,3 @@ rm -rf $RPM_BUILD_ROOT
 %files toplevel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lablgtk2
-%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtktop
-%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtktop_t
