@@ -1,13 +1,12 @@
 #
 # Conditional build:
-# _without_gl		- without lablgtkgl
-# _without_gnome	- without lablgnome
-# _without_glade	- without lablglade
-#
-%if 0%{?_without_glade:1}%{?_without_gnome:1}
-%define _without_glgn 1
-%endif
+
+%bcond_without gl	# without lablgtkgl
+%bcond_without gnome	# without lablgtkgnome
+%bcond_without glade	# without lablgtkglade
+
 %define _snap 20030423
+
 Summary:	GTK+ binding for OCaml
 Summary(pl):	Wi±zania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
@@ -19,13 +18,13 @@ Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk2-%{_snap}.ta
 # Source0-md5:	f20de46a7de7790e2345f18bc6759615
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 BuildRequires:	gtk+2-devel
-%{!?_without_gl:BuildRequires:	gtkglarea-devel}
-%{!?_without_glade:BuildRequires:	libglade2-devel}
-%{!?_without_gnome:BuildRequires:	libgnomecanvas-devel}
+%{?with_gl:BuildRequires:	gtkglarea-devel}
+%{?with_glade:BuildRequires:	libglade2-devel}
+%{?with_gnome:BuildRequires:	libgnomecanvas-devel}
 BuildRequires:	librsvg-devel >= 2.0
 BuildRequires:	libxml-devel
 BuildRequires:	ocaml-camlp4 >= 3.04-7
-%{!?_without_gl:BuildRequires:	ocaml-lablgl-devel}
+%{?with_gl:BuildRequires:	ocaml-lablgl-devel}
 %requires_eq	ocaml-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -198,9 +197,9 @@ Pakiet ten zawiera system interaktywny OCamla zlinkowany z lablgtk.
 %{__make} configure \
 	CC="%{__cc} %{rpmcflags} -fPIC" \
 	USE_CC=1 \
-	%{!?_without_gnome:USE_GNOMECANVAS=1} \
-	%{!?_without_glade:USE_GLADE=1} \
-	%{!?_without_gl:USE_GL=1} \
+	%{?with_gnome:USE_GNOMECANVAS=1} \
+	%{?with_glade:USE_GLADE=1} \
+	%{?with_gl:USE_GL=1} \
 	USE_RSVG=1
 
 %{__make} all opt \
@@ -272,7 +271,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_examplesdir}/%{name}-%{version}
 %{_libdir}/ocaml/site-lib/lablgtk2
 
-%if 0%{!?_without_gnome:1}
+%if %{with gnome}
 %files gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomecanvas.so
@@ -285,7 +284,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/site-lib/lablgnomecanvas
 %endif
 
-%if 0%{!?_without_glade:1}
+%if %{with glade}
 %files glade
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablglade2.so
@@ -299,7 +298,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/site-lib/lablglade
 %endif
 
-%if 0%{!?_without_gl:1}
+%if %{with gl}
 %files gl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtkgl2.so
