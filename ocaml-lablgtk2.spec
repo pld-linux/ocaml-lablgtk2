@@ -5,17 +5,15 @@
 %bcond_without gnome	# without lablgtkgnome
 %bcond_without glade	# without lablgtkglade
 
-%define _snap 20030828
-
 Summary:	GTK+ binding for OCaml
 Summary(pl):	Wi±zania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
-Version:	1.3.1
-Release:	0.%{_snap}.1
+Version:	2.2.0
+Release:	1
 License:	LGPL w/ linking exceptions
 Group:		Libraries
-Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk2-%{_snap}.tar.gz
-# Source0-md5:	426e7ae9bd4c3ea538dcab11934017a1
+Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk-%{version}.tar.gz
+# Source0-md5:	88206d11c197cb103adb3a3dd6bfb2dd
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 BuildRequires:	gtk+2-devel
 %{?with_gl:BuildRequires:	gtkglarea-devel}
@@ -192,7 +190,7 @@ Pakiet ten zawiera system interaktywny OCamla skonsolidowany z
 lablgtk.
 
 %prep
-%setup -q -n lablgtk2
+%setup -q -n lablgtk-2.2.0
 
 %build
 %configure \
