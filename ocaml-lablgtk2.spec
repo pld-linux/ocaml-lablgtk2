@@ -5,7 +5,7 @@
 %bcond_without gnome	# without lablgtkgnome
 %bcond_without glade	# without lablgtkglade
 
-%define _snap 20030707
+%define _snap 20030828
 
 Summary:	GTK+ binding for OCaml
 Summary(pl):	Wi±zania GTK+ dla OCamla
@@ -15,7 +15,7 @@ Release:	0.%{_snap}.1
 License:	LGPL w/ linking exceptions
 Group:		Libraries
 Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk2-%{_snap}.tar.gz
-# Source0-md5:	de6e511411389178e4279bceb8c1f1c2
+# Source0-md5:	426e7ae9bd4c3ea538dcab11934017a1
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 BuildRequires:	gtk+2-devel
 %{?with_gl:BuildRequires:	gtkglarea-devel}
@@ -23,7 +23,7 @@ BuildRequires:	gtk+2-devel
 %{?with_gnome:BuildRequires:	libgnomecanvas-devel}
 BuildRequires:	librsvg-devel >= 2.0
 BuildRequires:	libxml-devel
-BuildRequires:	ocaml-camlp4 >= 3.04-7
+BuildRequires:	ocaml-camlp4 >= 3.07
 %{?with_gl:BuildRequires:	ocaml-lablgl-devel}
 %requires_eq	ocaml-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -258,6 +258,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/glib.cm*
 %{_libdir}/ocaml/lablgtk2/gobject.cm*
 %{_libdir}/ocaml/lablgtk2/gtk.cm*
+%{_libdir}/ocaml/lablgtk2/gtkObject.cm*
 %{_libdir}/ocaml/lablgtk2/pango*.cm*
 %{_libdir}/ocaml/lablgtk2/gtk[ABDEILMNPRSTW]*.cm*
 # hmm.. where did xml_lexer go?
@@ -274,12 +275,16 @@ rm -rf $RPM_BUILD_ROOT
 %files gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomecanvas.so
+%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomeui.so
 
 %files gnome-devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/*Canvas*.cm*
+%{_libdir}/ocaml/lablgtk2/*Druid.cm*
 %{_libdir}/ocaml/lablgtk2/lablgnomecanvas.*
 %{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.*
+%{_libdir}/ocaml/lablgtk2/lablgnomeui.cm*
+%{_libdir}/ocaml/lablgtk2/*lablgnomeui.a
 %{_libdir}/ocaml/site-lib/lablgnomecanvas
 %endif
 
