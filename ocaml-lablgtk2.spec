@@ -20,7 +20,6 @@ BuildRequires:	gtk+2-devel
 %{?with_glade:BuildRequires:	libglade2-devel}
 %{?with_gnome:BuildRequires:	libgnomecanvas-devel}
 BuildRequires:	librsvg-devel >= 2.0
-BuildRequires:	libxml-devel
 BuildRequires:	ocaml-camlp4 >= 3.07
 %{?with_gl:BuildRequires:	ocaml-lablgl-devel}
 %requires_eq	ocaml-runtime
@@ -254,14 +253,15 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/g[BCDELMOPRTUWadp]*.cm*
+%{_libdir}/ocaml/lablgtk2/gAction.cm*
+%{_libdir}/ocaml/lablgtk2/gFile.cm*
 %{_libdir}/ocaml/lablgtk2/glib.cm*
 %{_libdir}/ocaml/lablgtk2/gobject.cm*
 %{_libdir}/ocaml/lablgtk2/gtk.cm*
+%{_libdir}/ocaml/lablgtk2/gtkFile.cm*
 %{_libdir}/ocaml/lablgtk2/gtkObject.cm*
 %{_libdir}/ocaml/lablgtk2/pango*.cm*
 %{_libdir}/ocaml/lablgtk2/gtk[ABDEILMNPRSTW]*.cm*
-# hmm.. where did xml_lexer go?
-#%%{_libdir}/ocaml/lablgtk2/x*.cm*
 %{_libdir}/ocaml/lablgtk2/*.[ho]
 %{_libdir}/ocaml/lablgtk2/lablgtk.*
 %{_libdir}/ocaml/lablgtk2/liblablgtk2.*
