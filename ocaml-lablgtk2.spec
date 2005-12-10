@@ -16,9 +16,14 @@ Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk-%{version}.t
 # Source0-md5:	47319aacbbb761323bdfab67513829df
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 BuildRequires:	gtk+2-devel
+BuildRequires:	gtkspell-devel
 %{?with_gl:BuildRequires:	gtkglarea-devel}
 %{?with_glade:BuildRequires:	libglade2-devel}
-%{?with_gnome:BuildRequires:	libgnomecanvas-devel}
+%if %{with gnome}
+BuildRequires:	gnome-panel-devel
+BuildRequires:	libgnomecanvas-devel
+BuildRequires:	libgnomeui-devel
+%endif
 BuildRequires:	librsvg-devel >= 2.0
 BuildRequires:	ocaml-camlp4 >= 3.07
 %{?with_gl:BuildRequires:	ocaml-lablgl-devel}
