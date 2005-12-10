@@ -9,7 +9,7 @@ Summary:	GTK+ binding for OCaml
 Summary(pl):	Wi±zania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.6.0
-Release:	1
+Release:	2
 License:	LGPL w/ linking exceptions
 Group:		Libraries
 Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk-%{version}.tar.gz
@@ -203,8 +203,7 @@ lablgtk.
 	%{!?with_glade:--without-glade} \
 	%{!?with_gl:--without-gl}
 
-%{__make} all opt \
-	LABLGLDIR=%{_libdir}/ocaml/lablgl
+%{__make} all opt
 
 %install
 rm -rf $RPM_BUILD_ROOT
