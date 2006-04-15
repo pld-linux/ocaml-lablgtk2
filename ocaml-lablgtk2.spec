@@ -5,6 +5,7 @@
 %bcond_without	gnome	# without lablgtkgnome
 %bcond_without	glade	# without lablgtkglade
 
+%define		ocaml_ver	3.09.1
 Summary:	GTK+ binding for OCaml
 Summary(pl):	Wi±zania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
@@ -16,8 +17,8 @@ Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk-%{version}.t
 # Source0-md5:	47319aacbbb761323bdfab67513829df
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 BuildRequires:	gtk+2-devel
-BuildRequires:	gtkspell-devel
 %{?with_gl:BuildRequires:	gtkglarea-devel}
+BuildRequires:	gtkspell-devel
 %{?with_glade:BuildRequires:	libglade2-devel}
 %if %{with gnome}
 BuildRequires:	gnome-panel-devel
@@ -25,7 +26,7 @@ BuildRequires:	libgnomecanvas-devel
 BuildRequires:	libgnomeui-devel
 %endif
 BuildRequires:	librsvg-devel >= 2.0
-BuildRequires:	ocaml-camlp4 >= 3.07
+BuildRequires:	ocaml-camlp4 >= %{ocaml_ver}
 %{?with_gl:BuildRequires:	ocaml-lablgl-devel}
 %requires_eq	ocaml-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -203,7 +204,8 @@ lablgtk.
 	%{!?with_glade:--without-glade} \
 	%{!?with_gl:--without-gl}
 
-%{__make} all opt
+%{__make} -j1 \
+	all opt
 
 %install
 rm -rf $RPM_BUILD_ROOT
