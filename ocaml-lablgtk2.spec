@@ -1,16 +1,15 @@
 #
 # Conditional build:
-
 %bcond_without	gl	# without lablgtkgl
 %bcond_without	gnome	# without lablgtkgnome
 %bcond_without	glade	# without lablgtkglade
-
-%define		ocaml_ver	1:3.09.1
+#
+%define		ocaml_ver	1:3.09.2
 Summary:	GTK+ binding for OCaml
 Summary(pl):	Wi±zania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.6.0
-Release:	3
+Release:	4
 License:	LGPL w/ linking exceptions
 Group:		Libraries
 Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk-%{version}.tar.gz
