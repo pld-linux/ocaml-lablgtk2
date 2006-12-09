@@ -146,6 +146,34 @@ needed to develop OCaml programs using LablGtk-GNOME.
 Wi±zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera pliki
 niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GNOME.
 
+%package gtkspell
+Summary:	GTK+ binding for OCaml - GtkSpell support
+Summary(pl):	Wi±zania GTK+ dla OCamla - obs³uga GtkSpella
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+%requires_eq	ocaml-runtime
+
+%description gtkspell
+GTK+ binding for OCaml, GtkSpell support.
+
+%description gtkspell -l pl
+Wi±zania GTK+ dla OCamla, obs³uga GtkSpella
+
+%package gtkspell-devel
+Summary:	GTK+ binding for OCaml - GtkSpell support, development part
+Summary(pl):	Wi±zania GTK+ dla OCamla - obs³uga GtkSpella, czê¶æ programistyczna
+Group:		Development/Libraries
+Requires:	%{name}-gtkspell = %{version}-%{release}
+%requires_eq	ocaml
+
+%description gtkspell-devel
+GTK+ binding for OCaml, GtkSpell support. This package contains files
+needed to develop OCaml programs using LablGtk-GtkSpell.
+
+%description gtkspell-devel -l pl
+Wi±zania GTK+ dla OCamla, obs³uga GtkSpella. Ten pakiet zawiera pliki
+niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GtkSpell.
+
 %package rsvg
 Summary:	GTK+ binding for OCaml - RSVG support
 Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla RSVG
@@ -208,7 +236,7 @@ lablgtk.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{stublibs,site-lib/labl{gtk2,gnomecanvas,glade,gtkgl,rsvg}},%{_examplesdir}/%{name}-%{version}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{stublibs,site-lib/labl{gtk2,gnomecanvas,glade,gtkgl,gtkspell,rsvg}},%{_examplesdir}/%{name}-%{version}}
 
 %{__make} install \
 	INSTALLDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2 \
@@ -234,7 +262,7 @@ archive(native) = "lablgtk.cmxa gtkInit.cmx"
 linkopts = ""
 EOF
 
-for f in gnomecanvas glade gtkgl rsvg ; do
+for f in glade %{?with_gnome:gnomecanvas} gtkgl gtkspell rsvg ; do
 cat > $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/labl$f/META <<EOF
 # Specifications for the "lablgtk" library:
 requires = "lablgtk2"
@@ -257,6 +285,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gdk-pixbuf-mlsource
 %{_libdir}/ocaml/lablgtk2/g[BCDELMOPRTUWadp]*.cm*
 %{_libdir}/ocaml/lablgtk2/gAction.cm*
 %{_libdir}/ocaml/lablgtk2/gFile.cm*
@@ -318,6 +347,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/*lablgnomeui.a
 %{_libdir}/ocaml/site-lib/lablgnomecanvas
 %endif
+
+%files gtkspell
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtkspell.so
+
+%files gtkspell-devel
+%defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablgtkspell.*
+%{_libdir}/ocaml/lablgtk2/liblablgtkspell.a
+%{_libdir}/ocaml/site-lib/lablgtkspell
 
 %files rsvg
 %defattr(644,root,root,755)
