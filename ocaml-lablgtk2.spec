@@ -15,10 +15,10 @@ Group:		Libraries
 Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk-%{version}.tar.gz
 # Source0-md5:	47319aacbbb761323bdfab67513829df
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
-BuildRequires:	gtk+2-devel
-%{?with_gl:BuildRequires:	gtkglarea-devel}
-BuildRequires:	gtkspell-devel
-%{?with_glade:BuildRequires:	libglade2-devel}
+BuildRequires:	gtk+2-devel >= 2.0
+%{?with_gl:BuildRequires:	gtkglarea-devel >= 1.99}
+BuildRequires:	gtkspell-devel >= 2.0
+%{?with_glade:BuildRequires:	libglade2-devel >= 2.0}
 %if %{with gnome}
 BuildRequires:	gnome-panel-devel
 BuildRequires:	libgnomecanvas-devel
@@ -54,96 +54,6 @@ OCaml programs using LablGtk.
 Wi±zania GTK+ dla OCamla. Pakiet ten zawiera pliki niezbêdne do
 tworzenia programów u¿ywaj±cych LablGtk.
 
-%package gnome
-Summary:	GTK+ binding for OCaml - GNOME support
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GNOME
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-%requires_eq	ocaml-runtime
-
-%description gnome
-GTK+ binding for OCaml, GNOME support. This package contains files
-needed to run bytecode OCaml programs using LablGtk-GNOME.
-
-%description gnome -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-GNOME.
-
-%package gnome-devel
-Summary:	GTK+ binding for OCaml - GNOME support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GNOME, czê¶æ programistyczna
-Group:		Development/Libraries
-Requires:	%{name}-gnome = %{version}-%{release}
-%requires_eq	ocaml
-
-%description gnome-devel
-GTK+ binding for OCaml, GNOME support. This package contains files
-needed to develop OCaml programs using LablGtk-GNOME.
-
-%description gnome-devel -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GNOME.
-
-%package glade
-Summary:	GTK+ binding for OCaml - Glade support
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla Glade
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-%requires_eq	ocaml-runtime
-
-%description glade
-GTK+ binding for OCaml, Glade support. This package contains files
-needed to run bytecode OCaml programs using LablGtk-Glade.
-
-%description glade -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-Glade.
-
-%package glade-devel
-Summary:	GTK+ binding for OCaml - Glade support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla Glade, czê¶æ programistyczna
-Group:		Development/Libraries
-Requires:	%{name}-glade = %{version}-%{release}
-%requires_eq	ocaml
-
-%description glade-devel
-GTK+ binding for OCaml, Glade support. This package contains files
-needed to develop OCaml programs using LablGtk-Glade.
-
-%description glade-devel -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-Glade.
-
-%package rsvg
-Summary:	GTK+ binding for OCaml - RSVG support
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla RSVG
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-%requires_eq	ocaml-runtime
-
-%description rsvg
-GTK+ binding for OCaml, RSVG support. This package contains files
-needed to run bytecode OCaml programs using LablGtk-RSVG.
-
-%description rsvg -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-RSVG.
-
-%package rsvg-devel
-Summary:	GTK+ binding for OCaml - RSVG support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla RSVG, czê¶æ programistyczna
-Group:		Development/Libraries
-Requires:	%{name}-rsvg = %{version}-%{release}
-%requires_eq	ocaml
-
-%description rsvg-devel
-GTK+ binding for OCaml, RSVG support. This package contains files
-needed to develop OCaml programs using LablGtk-RSVG.
-
-%description rsvg-devel -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-RSVG.
-
 %package gl
 Summary:	GTK+ binding for OCaml - GtkGL support
 Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GtkGL
@@ -175,6 +85,96 @@ needed to develop OCaml programs using LablGtk-GtkGL.
 %description gl-devel -l pl
 Wi±zania GTK+ dla OCamla, wsparcie dla GtkGL. Pakiet ten zawiera pliki
 niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GtkGL.
+
+%package glade
+Summary:	GTK+ binding for OCaml - Glade support
+Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla Glade
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+%requires_eq	ocaml-runtime
+
+%description glade
+GTK+ binding for OCaml, Glade support. This package contains files
+needed to run bytecode OCaml programs using LablGtk-Glade.
+
+%description glade -l pl
+Wi±zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera
+binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-Glade.
+
+%package glade-devel
+Summary:	GTK+ binding for OCaml - Glade support, development part
+Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla Glade, czê¶æ programistyczna
+Group:		Development/Libraries
+Requires:	%{name}-glade = %{version}-%{release}
+%requires_eq	ocaml
+
+%description glade-devel
+GTK+ binding for OCaml, Glade support. This package contains files
+needed to develop OCaml programs using LablGtk-Glade.
+
+%description glade-devel -l pl
+Wi±zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera pliki
+niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-Glade.
+
+%package gnome
+Summary:	GTK+ binding for OCaml - GNOME support
+Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GNOME
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+%requires_eq	ocaml-runtime
+
+%description gnome
+GTK+ binding for OCaml, GNOME support. This package contains files
+needed to run bytecode OCaml programs using LablGtk-GNOME.
+
+%description gnome -l pl
+Wi±zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera
+binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-GNOME.
+
+%package gnome-devel
+Summary:	GTK+ binding for OCaml - GNOME support, development part
+Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GNOME, czê¶æ programistyczna
+Group:		Development/Libraries
+Requires:	%{name}-gnome = %{version}-%{release}
+%requires_eq	ocaml
+
+%description gnome-devel
+GTK+ binding for OCaml, GNOME support. This package contains files
+needed to develop OCaml programs using LablGtk-GNOME.
+
+%description gnome-devel -l pl
+Wi±zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera pliki
+niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GNOME.
+
+%package rsvg
+Summary:	GTK+ binding for OCaml - RSVG support
+Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla RSVG
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+%requires_eq	ocaml-runtime
+
+%description rsvg
+GTK+ binding for OCaml, RSVG support. This package contains files
+needed to run bytecode OCaml programs using LablGtk-RSVG.
+
+%description rsvg -l pl
+Wi±zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera
+binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-RSVG.
+
+%package rsvg-devel
+Summary:	GTK+ binding for OCaml - RSVG support, development part
+Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla RSVG, czê¶æ programistyczna
+Group:		Development/Libraries
+Requires:	%{name}-rsvg = %{version}-%{release}
+%requires_eq	ocaml
+
+%description rsvg-devel
+GTK+ binding for OCaml, RSVG support. This package contains files
+needed to develop OCaml programs using LablGtk-RSVG.
+
+%description rsvg-devel -l pl
+Wi±zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera pliki
+niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-RSVG.
 
 %package toplevel
 Summary:	GTK+ binding for OCaml - interactive system
@@ -275,21 +275,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_examplesdir}/%{name}-%{version}
 %{_libdir}/ocaml/site-lib/lablgtk2
 
-%if %{with gnome}
-%files gnome
+%if %{with gl}
+%files gl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomecanvas.so
-%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomeui.so
+%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtkgl2.so
 
-%files gnome-devel
+%files gl-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/*Canvas*.cm*
-%{_libdir}/ocaml/lablgtk2/*Druid.cm*
-%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.*
-%{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.*
-%{_libdir}/ocaml/lablgtk2/lablgnomeui.cm*
-%{_libdir}/ocaml/lablgtk2/*lablgnomeui.a
-%{_libdir}/ocaml/site-lib/lablgnomecanvas
+%{_libdir}/ocaml/lablgtk2/glGtk.cm*
+%{_libdir}/ocaml/lablgtk2/lablgtkgl.*
+%{_libdir}/ocaml/lablgtk2/liblablgtkgl2.*
+%{_libdir}/ocaml/site-lib/lablgtkgl
 %endif
 
 %if %{with glade}
@@ -306,17 +302,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/site-lib/lablglade
 %endif
 
-%if %{with gl}
-%files gl
+%if %{with gnome}
+%files gnome
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtkgl2.so
+%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomecanvas.so
+%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomeui.so
 
-%files gl-devel
+%files gnome-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/glGtk.cm*
-%{_libdir}/ocaml/lablgtk2/lablgtkgl.*
-%{_libdir}/ocaml/lablgtk2/liblablgtkgl2.*
-%{_libdir}/ocaml/site-lib/lablgtkgl
+%{_libdir}/ocaml/lablgtk2/*Canvas*.cm*
+%{_libdir}/ocaml/lablgtk2/*Druid.cm*
+%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.*
+%{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.*
+%{_libdir}/ocaml/lablgtk2/lablgnomeui.cm*
+%{_libdir}/ocaml/lablgtk2/*lablgnomeui.a
+%{_libdir}/ocaml/site-lib/lablgnomecanvas
 %endif
 
 %files rsvg
