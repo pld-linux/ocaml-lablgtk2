@@ -6,7 +6,7 @@
 #
 %define		ocaml_ver	1:3.09.2
 Summary:	GTK+ binding for OCaml
-Summary(pl):	Wi±zania GTK+ dla OCamla
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.6.0
 Release:	4
@@ -34,13 +34,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 GTK+ binding for OCaml. This package contains files needed to run
 bytecode OCaml programs using LablGtk.
 
-%description -l pl
-Wi±zania GTK+ dla OCamla. Pakiet ten zawiera binaria potrzebne do
-uruchamiania programów u¿ywaj±cych LablGtk.
+%description -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla. Pakiet ten zawiera binaria potrzebne do
+uruchamiania programÃ³w uÅ¼ywajÄ…cych LablGtk.
 
 %package devel
 Summary:	GTK+ binding for OCaml - development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - cze¶æ programistyczna
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - czeÅ›Ä‡ programistyczna
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
@@ -50,13 +50,13 @@ Requires:	%{name} = %{version}-%{release}
 GTK+ binding for OCaml. This package contains files needed to develop
 OCaml programs using LablGtk.
 
-%description devel -l pl
-Wi±zania GTK+ dla OCamla. Pakiet ten zawiera pliki niezbêdne do
-tworzenia programów u¿ywaj±cych LablGtk.
+%description devel -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla. Pakiet ten zawiera pliki niezbÄ™dne do
+tworzenia programÃ³w uÅ¼ywajÄ…cych LablGtk.
 
 %package gl
 Summary:	GTK+ binding for OCaml - GtkGL support
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GtkGL
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla GtkGL
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml-lablgl
@@ -66,13 +66,13 @@ Requires:	%{name} = %{version}-%{release}
 GTK+ binding for OCaml, GtkGL support. This package contains files
 needed to run bytecode OCaml programs using LablGtk-GtkGL.
 
-%description gl -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla GtkGL. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-GtkGL.
+%description gl -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla GtkGL. Pakiet ten zawiera
+binaria potrzebne do uruchamiania programÃ³w uÅ¼ywajÄ…cych LablGtk-GtkGL.
 
 %package gl-devel
 Summary:	GTK+ binding for OCaml - GtkGL support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GtkGL, czê¶æ programistyczna
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla GtkGL, czÄ™Å›Ä‡ programistyczna
 Group:		Development/Libraries
 Requires:	%{name}-gl = %{version}-%{release}
 %requires_eq	ocaml
@@ -82,13 +82,13 @@ Requires:	%{name}-gl = %{version}-%{release}
 GTK+ binding for OCaml, GtkGL support. This package contains files
 needed to develop OCaml programs using LablGtk-GtkGL.
 
-%description gl-devel -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla GtkGL. Pakiet ten zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GtkGL.
+%description gl-devel -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla GtkGL. Pakiet ten zawiera pliki
+niezbÄ™dne do tworzenia programÃ³w uÅ¼ywajÄ…cych LablGtk-GtkGL.
 
 %package glade
 Summary:	GTK+ binding for OCaml - Glade support
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla Glade
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla Glade
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml-runtime
@@ -97,13 +97,13 @@ Requires:	%{name} = %{version}-%{release}
 GTK+ binding for OCaml, Glade support. This package contains files
 needed to run bytecode OCaml programs using LablGtk-Glade.
 
-%description glade -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-Glade.
+%description glade -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera
+binaria potrzebne do uruchamiania programÃ³w uÅ¼ywajÄ…cych LablGtk-Glade.
 
 %package glade-devel
 Summary:	GTK+ binding for OCaml - Glade support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla Glade, czê¶æ programistyczna
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla Glade, czÄ™Å›Ä‡ programistyczna
 Group:		Development/Libraries
 Requires:	%{name}-glade = %{version}-%{release}
 %requires_eq	ocaml
@@ -112,13 +112,13 @@ Requires:	%{name}-glade = %{version}-%{release}
 GTK+ binding for OCaml, Glade support. This package contains files
 needed to develop OCaml programs using LablGtk-Glade.
 
-%description glade-devel -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-Glade.
+%description glade-devel -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla Glade. Pakiet ten zawiera pliki
+niezbÄ™dne do tworzenia programÃ³w uÅ¼ywajÄ…cych LablGtk-Glade.
 
 %package gnome
 Summary:	GTK+ binding for OCaml - GNOME support
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GNOME
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla GNOME
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml-runtime
@@ -127,13 +127,13 @@ Requires:	%{name} = %{version}-%{release}
 GTK+ binding for OCaml, GNOME support. This package contains files
 needed to run bytecode OCaml programs using LablGtk-GNOME.
 
-%description gnome -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-GNOME.
+%description gnome -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera
+binaria potrzebne do uruchamiania programÃ³w uÅ¼ywajÄ…cych LablGtk-GNOME.
 
 %package gnome-devel
 Summary:	GTK+ binding for OCaml - GNOME support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla GNOME, czê¶æ programistyczna
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla GNOME, czÄ™Å›Ä‡ programistyczna
 Group:		Development/Libraries
 Requires:	%{name}-gnome = %{version}-%{release}
 %requires_eq	ocaml
@@ -142,13 +142,13 @@ Requires:	%{name}-gnome = %{version}-%{release}
 GTK+ binding for OCaml, GNOME support. This package contains files
 needed to develop OCaml programs using LablGtk-GNOME.
 
-%description gnome-devel -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GNOME.
+%description gnome-devel -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla GNOME. Pakiet ten zawiera pliki
+niezbÄ™dne do tworzenia programÃ³w uÅ¼ywajÄ…cych LablGtk-GNOME.
 
 %package gtkspell
 Summary:	GTK+ binding for OCaml - GtkSpell support
-Summary(pl):	Wi±zania GTK+ dla OCamla - obs³uga GtkSpella
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - obsÅ‚uga GtkSpella
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml-runtime
@@ -156,12 +156,12 @@ Requires:	%{name} = %{version}-%{release}
 %description gtkspell
 GTK+ binding for OCaml, GtkSpell support.
 
-%description gtkspell -l pl
-Wi±zania GTK+ dla OCamla, obs³uga GtkSpella
+%description gtkspell -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, obsÅ‚uga GtkSpella
 
 %package gtkspell-devel
 Summary:	GTK+ binding for OCaml - GtkSpell support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - obs³uga GtkSpella, czê¶æ programistyczna
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - obsÅ‚uga GtkSpella, czÄ™Å›Ä‡ programistyczna
 Group:		Development/Libraries
 Requires:	%{name}-gtkspell = %{version}-%{release}
 %requires_eq	ocaml
@@ -170,13 +170,13 @@ Requires:	%{name}-gtkspell = %{version}-%{release}
 GTK+ binding for OCaml, GtkSpell support. This package contains files
 needed to develop OCaml programs using LablGtk-GtkSpell.
 
-%description gtkspell-devel -l pl
-Wi±zania GTK+ dla OCamla, obs³uga GtkSpella. Ten pakiet zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-GtkSpell.
+%description gtkspell-devel -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, obsÅ‚uga GtkSpella. Ten pakiet zawiera pliki
+niezbÄ™dne do tworzenia programÃ³w uÅ¼ywajÄ…cych LablGtk-GtkSpell.
 
 %package rsvg
 Summary:	GTK+ binding for OCaml - RSVG support
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla RSVG
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla RSVG
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml-runtime
@@ -185,13 +185,13 @@ Requires:	%{name} = %{version}-%{release}
 GTK+ binding for OCaml, RSVG support. This package contains files
 needed to run bytecode OCaml programs using LablGtk-RSVG.
 
-%description rsvg -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów u¿ywaj±cych LablGtk-RSVG.
+%description rsvg -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera
+binaria potrzebne do uruchamiania programÃ³w uÅ¼ywajÄ…cych LablGtk-RSVG.
 
 %package rsvg-devel
 Summary:	GTK+ binding for OCaml - RSVG support, development part
-Summary(pl):	Wi±zania GTK+ dla OCamla - wsparcie dla RSVG, czê¶æ programistyczna
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - wsparcie dla RSVG, czÄ™Å›Ä‡ programistyczna
 Group:		Development/Libraries
 Requires:	%{name}-rsvg = %{version}-%{release}
 %requires_eq	ocaml
@@ -200,13 +200,13 @@ Requires:	%{name}-rsvg = %{version}-%{release}
 GTK+ binding for OCaml, RSVG support. This package contains files
 needed to develop OCaml programs using LablGtk-RSVG.
 
-%description rsvg-devel -l pl
-Wi±zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera pliki
-niezbêdne do tworzenia programów u¿ywaj±cych LablGtk-RSVG.
+%description rsvg-devel -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla, wsparcie dla RSVG. Pakiet ten zawiera pliki
+niezbÄ™dne do tworzenia programÃ³w uÅ¼ywajÄ…cych LablGtk-RSVG.
 
 %package toplevel
 Summary:	GTK+ binding for OCaml - interactive system
-Summary(pl):	Wi±zania GTK+ dla OCamla - system interaktywny
+Summary(pl.UTF-8):   WiÄ…zania GTK+ dla OCamla - system interaktywny
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 %requires_eq	ocaml
@@ -216,8 +216,8 @@ GTK+ binding for OCaml. GNOME and Glade support is included. This
 package contains OCaml toplevel interactive system linked with
 lablgtk.
 
-%description toplevel -l pl
-Wi±zania GTK+ dla OCamla. Wsparcie dla GNOME i Glade jest do³±czone.
+%description toplevel -l pl.UTF-8
+WiÄ…zania GTK+ dla OCamla. Wsparcie dla GNOME i Glade jest doÅ‚Ä…czone.
 Pakiet ten zawiera system interaktywny OCamla skonsolidowany z
 lablgtk.
 
