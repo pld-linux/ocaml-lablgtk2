@@ -1,8 +1,8 @@
 #
 # Conditional build:
-%bcond_without	gl	# without lablgtkgl
-%bcond_without	gnome	# without lablgtkgnome
+%bcond_without	opengl	# without lablgtkgl
 %bcond_without	glade	# without lablgtkglade
+%bcond_without	gnome	# without lablgtkgnome
 #
 %define		ocaml_ver	1:3.09.2
 Summary:	GTK+ binding for OCaml
@@ -16,7 +16,7 @@ Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/lablgtk-%{version}.t
 # Source0-md5:	47319aacbbb761323bdfab67513829df
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 BuildRequires:	gtk+2-devel >= 2.0
-%{?with_gl:BuildRequires:	gtkglarea-devel >= 1.99}
+%{?with_opengl:BuildRequires:	gtkglarea-devel >= 1.99}
 BuildRequires:	gtkspell-devel >= 2.0
 %{?with_glade:BuildRequires:	libglade2-devel >= 2.0}
 %if %{with gnome}
@@ -26,7 +26,7 @@ BuildRequires:	libgnomeui-devel
 %endif
 BuildRequires:	librsvg-devel >= 2.0
 BuildRequires:	ocaml-camlp4 >= %{ocaml_ver}
-%{?with_gl:BuildRequires:	ocaml-lablgl-devel}
+%{?with_opengl:BuildRequires:	ocaml-lablgl-devel}
 %requires_eq	ocaml-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -229,7 +229,7 @@ lablgtk.
 	CC="%{__cc} %{rpmcflags} -fPIC" \
 	%{!?with_gnome:--without-gnomecanvas} \
 	%{!?with_glade:--without-glade} \
-	%{!?with_gl:--without-gl}
+	%{!?with_opengl:--without-gl}
 
 %{__make} -j1 \
 	all opt
@@ -304,7 +304,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_examplesdir}/%{name}-%{version}
 %{_libdir}/ocaml/site-lib/lablgtk2
 
-%if %{with gl}
+%if %{with opengl}
 %files gl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtkgl2.so
