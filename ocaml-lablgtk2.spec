@@ -45,7 +45,6 @@ Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla - cześć programistyczna
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
-%requires_eq	ocaml-lablgl-devel
 
 %description devel
 GTK+ binding for OCaml. This package contains files needed to develop
