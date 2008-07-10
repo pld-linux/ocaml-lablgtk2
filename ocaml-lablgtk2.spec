@@ -183,12 +183,14 @@ Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
 
 %description gtksourceview
-GTK+ binding for OCaml, GtkSourceView support. This package contains files
-needed to run bytecode OCaml programs using LablGtk-GtkSourceView.
+GTK+ binding for OCaml, GtkSourceView support. This package contains
+files needed to run bytecode OCaml programs using
+LablGtk-GtkSourceView.
 
 %description gtksourceview -l pl.UTF-8
-Wiązania GTK+ dla OCamla, wsparcie dla GtkSourceView. Pakiet ten zawiera
-binaria potrzebne do uruchamiania programów używających LablGtk-GtkSourceView.
+Wiązania GTK+ dla OCamla, wsparcie dla GtkSourceView. Pakiet ten
+zawiera binaria potrzebne do uruchamiania programów używających
+LablGtk-GtkSourceView.
 
 %package gtksourceview-devel
 Summary:	GTK+ binding for OCaml - GtkSourceView support, development part
@@ -198,12 +200,13 @@ Requires:	%{name}-gtksourceview = %{version}-%{release}
 %requires_eq	ocaml
 
 %description gtksourceview-devel
-GTK+ binding for OCaml, GtkSourceView support. This package contains files
-needed to develop OCaml programs using LablGtk-GtkSourceView.
+GTK+ binding for OCaml, GtkSourceView support. This package contains
+files needed to develop OCaml programs using LablGtk-GtkSourceView.
 
 %description gtksourceview-devel -l pl.UTF-8
-Wiązania GTK+ dla OCamla, wsparcie dla GtkSourceView. Pakiet ten zawiera pliki
-niezbędne do tworzenia programów używających LablGtk-GtkSourceView.
+Wiązania GTK+ dla OCamla, wsparcie dla GtkSourceView. Pakiet ten
+zawiera pliki niezbędne do tworzenia programów używających
+LablGtk-GtkSourceView.
 
 %package rsvg
 Summary:	GTK+ binding for OCaml - RSVG support
