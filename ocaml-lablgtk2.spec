@@ -8,13 +8,13 @@
 Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
-Version:	2.12.0
-Release:	3
-License:	LGPL w/ linking exceptions
+Version:	2.14.2
+Release:	1
+License:	LGPL with linking exceptions
 Group:		Libraries
+#Source0Download: http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/lablgtk.html
 Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/dist/lablgtk-%{version}.tar.gz
-# Source0-md5:	0e253128afee3cdc6e9b43c34b35984d
-Patch0:		%{name}-gnome.patch
+# Source0-md5:	bad77680a72dab8b915cae99d1ec9b1f
 URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/lablgtk.html
 BuildRequires:	gtk+2-devel >= 2:2.10.0
 %{?with_opengl:BuildRequires:	gtkglarea-devel >= 1.99}
@@ -257,7 +257,6 @@ lablgtk.
 
 %prep
 %setup -q -n lablgtk-%{version}
-%patch0 -p1
 
 %build
 %configure \
@@ -282,7 +281,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{stublibs,site-lib/labl{g
 cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 # .mli files stay, they are the only documentation, but .ml go
-rm -f $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.ml
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.ml
 gzip -9nf $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.mli
 mv $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.gz .
 
@@ -330,6 +329,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/gtk.cm*
 %{_libdir}/ocaml/lablgtk2/gtkFile.cm*
 %{_libdir}/ocaml/lablgtk2/gtkObject.cm*
+%{_libdir}/ocaml/lablgtk2/gutf8.cm*
 %{_libdir}/ocaml/lablgtk2/pango*.cm*
 %{_libdir}/ocaml/lablgtk2/gtk[ABDEILMNPRSTW]*.cm*
 %{_libdir}/ocaml/lablgtk2/*.[ho]
