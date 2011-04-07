@@ -209,6 +209,39 @@ Wiązania GTK+ dla OCamla, wsparcie dla GtkSourceView. Pakiet ten
 zawiera pliki niezbędne do tworzenia programów używających
 LablGtk-GtkSourceView.
 
+%package gtksourceview2
+Summary:	GTK+ binding for OCaml - GtkSourceView2 support
+Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla - wsparcie dla GtkSourceView2
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+%requires_eq	ocaml
+
+%description gtksourceview2
+GTK+ binding for OCaml, GtkSourceView2 support. This package contains
+files needed to run bytecode OCaml programs using
+LablGtk-GtkSourceView2.
+
+%description gtksourceview2 -l pl.UTF-8
+Wiązania GTK+ dla OCamla, wsparcie dla GtkSourceView2. Pakiet ten
+zawiera binaria potrzebne do uruchamiania programów używających
+LablGtk-GtkSourceView2.
+
+%package gtksourceview2-devel
+Summary:	GTK+ binding for OCaml - GtkSourceView2 support, development part
+Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla - wsparcie dla GtkSourceView2, część programistyczna
+Group:		Development/Libraries
+Requires:	%{name}-gtksourceview2 = %{version}-%{release}
+%requires_eq	ocaml
+
+%description gtksourceview2-devel
+GTK+ binding for OCaml, GtkSourceView2 support. This package contains
+files needed to develop OCaml programs using LablGtk-GtkSourceView2.
+
+%description gtksourceview2-devel -l pl.UTF-8
+Wiązania GTK+ dla OCamla, wsparcie dla GtkSourceView2. Pakiet ten
+zawiera pliki niezbędne do tworzenia programów używających
+LablGtk-GtkSourceView2.
+
 %package rsvg
 Summary:	GTK+ binding for OCaml - RSVG support
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla - wsparcie dla RSVG
@@ -411,6 +444,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview.a
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtksourceview.a
+
+%files gtksourceview2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtksourceview2.so
+
+%files gtksourceview2-devel
+%defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/gSourceView2.cm*
+%{_libdir}/ocaml/lablgtk2/sourceView2Enums.cm*
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview2.a
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview2.cm*
+%{_libdir}/ocaml/lablgtk2/liblablgtksourceview2.a
 
 %files rsvg
 %defattr(644,root,root,755)
