@@ -2,14 +2,14 @@
 # Conditional build:
 %bcond_without	opengl	# without lablgtkgl
 %bcond_without	glade	# without lablgtkglade
-%bcond_without	gnome	# without lablgtkgnome
+%bcond_with	gnome	# with lablgtkgnome (incompatible with GNOME 3)
 #
 %define		ocaml_ver	1:3.09.2
 Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.14.2
-Release:	1
+Release:	2
 License:	LGPL with linking exceptions
 Group:		Libraries
 #Source0Download: http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/lablgtk.html
@@ -20,6 +20,7 @@ BuildRequires:	gtk+2-devel >= 2:2.10.0
 %{?with_opengl:BuildRequires:	gtkglarea-devel >= 1.99}
 BuildRequires:	gtkspell-devel >= 2.0
 BuildRequires:	gtksourceview-devel
+BuildRequires:	gtksourceview2-devel
 %{?with_glade:BuildRequires:	libglade2-devel >= 2.0}
 %if %{with gnome}
 BuildRequires:	gnome-panel-devel
