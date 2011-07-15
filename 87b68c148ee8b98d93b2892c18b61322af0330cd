@@ -1,0 +1,3 @@
+- merged some ideas from lablgtk.spec (including update to 1.2.5)
+- removed obsolete gnome patch
+- Obsoletes: lablgtk-*
