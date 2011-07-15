@@ -1,0 +1,4 @@
+- main package group changed to Libraries
+- added toplevel subpackge with ocaml toplevel systems
+- added -fpic to cflags (might be needed in .so)
+- added META file for findlib
