@@ -2,14 +2,14 @@
 # Conditional build:
 %bcond_without	opengl	# without lablgtkgl
 %bcond_without	glade	# without lablgtkglade
-%bcond_with	gnome	# with lablgtkgnome (incompatible with GNOME 3)
+%bcond_without	gnome	# with lablgtkgnome (incompatible with GNOME 3)
 #
 %define		ocaml_ver	1:3.09.2
 Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.14.2
-Release:	3
+Release:	4
 License:	LGPL with linking exceptions
 Group:		Libraries
 #Source0Download: http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/lablgtk.html
@@ -23,7 +23,6 @@ BuildRequires:	gtksourceview-devel
 BuildRequires:	gtksourceview2-devel
 %{?with_glade:BuildRequires:	libglade2-devel >= 2.0}
 %if %{with gnome}
-BuildRequires:	gnome-panel-devel
 BuildRequires:	libgnomecanvas-devel
 BuildRequires:	libgnomeui-devel
 %endif
@@ -406,7 +405,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomecanvas.so
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomeui.so
-%attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablpanel.so
 
 %files gnome-devel
 %defattr(644,root,root,755)
@@ -415,11 +413,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/lablgnomecanvas.*
 %{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.*
 %{_libdir}/ocaml/lablgtk2/lablgnomeui.cm*
-%{_libdir}/ocaml/lablgtk2/lablpanel.cm*
 %{_libdir}/ocaml/lablgtk2/*lablgnomeui.a
-%{_libdir}/ocaml/lablgtk2/lablpanel.a
-%{_libdir}/ocaml/lablgtk2/liblablpanel.a
-%{_libdir}/ocaml/lablgtk2/panel.cm*
 %{_libdir}/ocaml/site-lib/lablgnomecanvas
 %endif
 
