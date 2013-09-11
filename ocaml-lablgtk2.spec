@@ -8,14 +8,14 @@
 Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
-Version:	2.14.2
-Release:	4
+Version:	2.16.0
+Release:	1
 License:	LGPL with linking exceptions
 Group:		Libraries
-#Source0Download: http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/lablgtk.html
-Source0:	http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/dist/lablgtk-%{version}.tar.gz
-# Source0-md5:	bad77680a72dab8b915cae99d1ec9b1f
-URL:		http://wwwfun.kurims.kyoto-u.ac.jp/soft/lsl/lablgtk.html
+#Source0Download: http://lablgtk.forge.ocamlcore.org/
+Source0:	https://forge.ocamlcore.org/frs/download.php/979/lablgtk-%{version}.tar.gz
+# Source0-md5:	052519ce2a77d2316732bc4d565b6399
+URL:		http://lablgtk.forge.ocamlcore.org/
 BuildRequires:	gtk+2-devel >= 2:2.10.0
 %{?with_opengl:BuildRequires:	gtkglarea-devel >= 1.99}
 BuildRequires:	gtkspell-devel >= 2.0
@@ -305,7 +305,7 @@ lablgtk.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{stublibs,site-lib/labl{gtk2,gnomecanvas,glade,gtkgl,gtkspell,rsvg}},%{_examplesdir}/%{name}-%{version}}
 
-%{__make} install \
+%{__make} old-install \
 	INSTALLDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2 \
 	DLLDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml/stublibs \
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml \
@@ -353,25 +353,38 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gdk_pixbuf_mlsource
-%{_libdir}/ocaml/lablgtk2/g[BCDELMOPRTUWadp]*.cm*
-%{_libdir}/ocaml/lablgtk2/gAction.cm*
-%{_libdir}/ocaml/lablgtk2/gAssistant.cm*
-%{_libdir}/ocaml/lablgtk2/gFile.cm*
+%{_libdir}/ocaml/lablgtk2/g[ABCDEFLMOPRTUW]*.cm*
+%{_libdir}/ocaml/lablgtk2/gaux.cm*
+%{_libdir}/ocaml/lablgtk2/gdk*.cm*
 %{_libdir}/ocaml/lablgtk2/glib.cm*
 %{_libdir}/ocaml/lablgtk2/gobject.cm*
+%{_libdir}/ocaml/lablgtk2/gpointer.cm*
 %{_libdir}/ocaml/lablgtk2/gtk.cm*
-%{_libdir}/ocaml/lablgtk2/gtkFile.cm*
-%{_libdir}/ocaml/lablgtk2/gtkObject.cm*
+%{_libdir}/ocaml/lablgtk2/gtk[ABDEFILMNOPRTW]*.cm*
+%{_libdir}/ocaml/lablgtk2/gtkSignal.cm*
+%{_libdir}/ocaml/lablgtk2/gtkStock.cm*
 %{_libdir}/ocaml/lablgtk2/gutf8.cm*
+%{_libdir}/ocaml/lablgtk2/ogtk*.cm*
 %{_libdir}/ocaml/lablgtk2/pango*.cm*
-%{_libdir}/ocaml/lablgtk2/gtk[ABDEILMNPRSTW]*.cm*
-%{_libdir}/ocaml/lablgtk2/*.[ho]
-%{_libdir}/ocaml/lablgtk2/lablgtk.*
-%{_libdir}/ocaml/lablgtk2/liblablgtk2.*
-%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/varcc
+%{_libdir}/ocaml/lablgtk2/gtkInit.o
+%{_libdir}/ocaml/lablgtk2/gtkThread.o
+%{_libdir}/ocaml/lablgtk2/gdk_tags.h
+%{_libdir}/ocaml/lablgtk2/gdkpixbuf_tags.h
+%{_libdir}/ocaml/lablgtk2/gdkprivate-win32.h
+%{_libdir}/ocaml/lablgtk2/glib_tags.h
+%{_libdir}/ocaml/lablgtk2/gobject_tags.h
+%{_libdir}/ocaml/lablgtk2/gtk_tags.h
+%{_libdir}/ocaml/lablgtk2/ml_*.h
+%{_libdir}/ocaml/lablgtk2/pango_tags.h
+%{_libdir}/ocaml/lablgtk2/win32.h
+%{_libdir}/ocaml/lablgtk2/wrappers.h
+%{_libdir}/ocaml/lablgtk2/lablgtk.a
+%{_libdir}/ocaml/lablgtk2/lablgtk.cm*
+%{_libdir}/ocaml/lablgtk2/liblablgtk2.a
 %attr(755,root,root) %{_libdir}/ocaml/lablgtk2/propcc
-%{_examplesdir}/%{name}-%{version}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/varcc
 %{_libdir}/ocaml/site-lib/lablgtk2
+%{_examplesdir}/%{name}-%{version}
 
 %if %{with opengl}
 %files gl
@@ -381,8 +394,10 @@ rm -rf $RPM_BUILD_ROOT
 %files gl-devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/glGtk.cm*
-%{_libdir}/ocaml/lablgtk2/lablgtkgl.*
-%{_libdir}/ocaml/lablgtk2/liblablgtkgl2.*
+%{_libdir}/ocaml/lablgtk2/gtkgl_tags.h
+%{_libdir}/ocaml/lablgtk2/lablgtkgl.a
+%{_libdir}/ocaml/lablgtk2/lablgtkgl.cm*
+%{_libdir}/ocaml/lablgtk2/liblablgtkgl2.a
 %{_libdir}/ocaml/site-lib/lablgtkgl
 %endif
 
@@ -395,8 +410,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lablgladecc2
 %{_libdir}/ocaml/lablgtk2/glade.cm*
-%{_libdir}/ocaml/lablgtk2/lablglade.*
-%{_libdir}/ocaml/lablgtk2/liblablglade2.*
+%{_libdir}/ocaml/lablgtk2/lablglade.a
+%{_libdir}/ocaml/lablgtk2/lablglade.cm*
+%{_libdir}/ocaml/lablgtk2/liblablglade2.a
 %{_libdir}/ocaml/site-lib/lablglade
 %endif
 
@@ -408,12 +424,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gnome-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/*Canvas*.cm*
-%{_libdir}/ocaml/lablgtk2/*Druid.cm*
-%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.*
-%{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.*
+%{_libdir}/ocaml/lablgtk2/gnoCanvas*.cm*
+%{_libdir}/ocaml/lablgtk2/gnoDruid.cm*
+%{_libdir}/ocaml/lablgtk2/gnomeCanvas*.cm*
+%{_libdir}/ocaml/lablgtk2/gnomeDruid.cm*
+%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.a
+%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.cm*
+%{_libdir}/ocaml/lablgtk2/lablgnomeui.a
 %{_libdir}/ocaml/lablgtk2/lablgnomeui.cm*
-%{_libdir}/ocaml/lablgtk2/*lablgnomeui.a
+%{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.a
+%{_libdir}/ocaml/lablgtk2/liblablgnomeui.a
 %{_libdir}/ocaml/site-lib/lablgnomecanvas
 %endif
 
@@ -423,7 +443,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gtkspell-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/lablgtkspell.*
+%{_libdir}/ocaml/lablgtk2/gtkSpell.cm*
+%{_libdir}/ocaml/lablgtk2/lablgtkspell.a
+%{_libdir}/ocaml/lablgtk2/lablgtkspell.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtkspell.a
 %{_libdir}/ocaml/site-lib/lablgtkspell
 
@@ -434,7 +456,9 @@ rm -rf $RPM_BUILD_ROOT
 %files gtksourceview-devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/gSourceView.cm*
+%{_libdir}/ocaml/lablgtk2/gtkSourceView.cm*
 %{_libdir}/ocaml/lablgtk2/sourceViewEnums.cm*
+%{_libdir}/ocaml/lablgtk2/sourceView_tags.h
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview.a
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtksourceview.a
@@ -446,7 +470,9 @@ rm -rf $RPM_BUILD_ROOT
 %files gtksourceview2-devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/gSourceView2.cm*
+%{_libdir}/ocaml/lablgtk2/gtkSourceView2.cm*
 %{_libdir}/ocaml/lablgtk2/sourceView2Enums.cm*
+%{_libdir}/ocaml/lablgtk2/sourceView2_tags.h
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview2.a
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview2.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtksourceview2.a
@@ -458,8 +484,9 @@ rm -rf $RPM_BUILD_ROOT
 %files rsvg-devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/rsvg.cm*
-%{_libdir}/ocaml/lablgtk2/lablrsvg.*
-%{_libdir}/ocaml/lablgtk2/liblablrsvg.*
+%{_libdir}/ocaml/lablgtk2/lablrsvg.a
+%{_libdir}/ocaml/lablgtk2/lablrsvg.cm*
+%{_libdir}/ocaml/lablgtk2/liblablrsvg.a
 %{_libdir}/ocaml/site-lib/lablrsvg
 
 %files toplevel
