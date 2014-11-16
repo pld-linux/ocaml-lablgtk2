@@ -9,7 +9,7 @@ Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.16.0
-Release:	1
+Release:	2
 License:	LGPL with linking exceptions
 Group:		Libraries
 #Source0Download: http://lablgtk.forge.ocamlcore.org/
