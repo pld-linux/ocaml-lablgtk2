@@ -3,13 +3,19 @@
 %bcond_without	opengl	# without lablgtkgl
 %bcond_without	glade	# without lablgtkglade
 %bcond_without	gnome	# with lablgtkgnome (incompatible with GNOME 3)
+%bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
 #
+%ifarch x32
+# not yet available on x32 (ocaml 4.02.1), remove when upstream will support it
+%undefine	with_ocaml_opt
+%endif
+
 %define		ocaml_ver	1:3.09.2
 Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.18.3
-Release:	1
+Release:	2
 License:	LGPL with linking exceptions
 Group:		Libraries
 #Source0Download: http://lablgtk.forge.ocamlcore.org/
@@ -299,7 +305,7 @@ lablgtk.
 	%{!?with_opengl:--without-gl}
 
 %{__make} -j1 \
-	all opt
+	all %{?with_ocaml_opt:opt}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -366,8 +372,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/gutf8.cm*
 %{_libdir}/ocaml/lablgtk2/ogtk*.cm*
 %{_libdir}/ocaml/lablgtk2/pango*.cm*
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/lablgtk2/gtkInit.o
 %{_libdir}/ocaml/lablgtk2/gtkThread.o
+%{_libdir}/ocaml/lablgtk2/lablgtk.a
+%endif
 %{_libdir}/ocaml/lablgtk2/gdk_tags.h
 %{_libdir}/ocaml/lablgtk2/gdkpixbuf_tags.h
 %{_libdir}/ocaml/lablgtk2/gdkprivate-win32.h
@@ -379,7 +388,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/pango_tags.h
 %{_libdir}/ocaml/lablgtk2/win32.h
 %{_libdir}/ocaml/lablgtk2/wrappers.h
-%{_libdir}/ocaml/lablgtk2/lablgtk.a
 %{_libdir}/ocaml/lablgtk2/lablgtk.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtk2.a
 %attr(755,root,root) %{_libdir}/ocaml/lablgtk2/propcc
@@ -396,7 +404,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/glGtk.cm*
 %{_libdir}/ocaml/lablgtk2/gtkgl_tags.h
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/lablgtk2/lablgtkgl.a
+%endif
 %{_libdir}/ocaml/lablgtk2/lablgtkgl.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtkgl2.a
 %{_libdir}/ocaml/site-lib/lablgtkgl
@@ -411,7 +421,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lablgladecc2
 %{_libdir}/ocaml/lablgtk2/glade.cm*
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/lablgtk2/lablglade.a
+%endif
 %{_libdir}/ocaml/lablgtk2/lablglade.cm*
 %{_libdir}/ocaml/lablgtk2/liblablglade2.a
 %{_libdir}/ocaml/site-lib/lablglade
@@ -429,9 +441,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/gnoDruid.cm*
 %{_libdir}/ocaml/lablgtk2/gnomeCanvas*.cm*
 %{_libdir}/ocaml/lablgtk2/gnomeDruid.cm*
-%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.a
 %{_libdir}/ocaml/lablgtk2/lablgnomecanvas.cm*
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.a
 %{_libdir}/ocaml/lablgtk2/lablgnomeui.a
+%endif
 %{_libdir}/ocaml/lablgtk2/lablgnomeui.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.a
 %{_libdir}/ocaml/lablgtk2/liblablgnomeui.a
@@ -445,7 +459,9 @@ rm -rf $RPM_BUILD_ROOT
 %files gtkspell-devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/gtkSpell.cm*
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/lablgtk2/lablgtkspell.a
+%endif
 %{_libdir}/ocaml/lablgtk2/lablgtkspell.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtkspell.a
 %{_libdir}/ocaml/site-lib/lablgtkspell
@@ -460,7 +476,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/gtkSourceView.cm*
 %{_libdir}/ocaml/lablgtk2/sourceViewEnums.cm*
 %{_libdir}/ocaml/lablgtk2/sourceView_tags.h
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview.a
+%endif
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtksourceview.a
 
@@ -474,7 +492,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/gtkSourceView2.cm*
 %{_libdir}/ocaml/lablgtk2/sourceView2Enums.cm*
 %{_libdir}/ocaml/lablgtk2/sourceView2_tags.h
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview2.a
+%endif
 %{_libdir}/ocaml/lablgtk2/lablgtksourceview2.cm*
 %{_libdir}/ocaml/lablgtk2/liblablgtksourceview2.a
 
@@ -485,7 +505,9 @@ rm -rf $RPM_BUILD_ROOT
 %files rsvg-devel
 %defattr(644,root,root,755)
 %{_libdir}/ocaml/lablgtk2/rsvg.cm*
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/lablgtk2/lablrsvg.a
+%endif
 %{_libdir}/ocaml/lablgtk2/lablrsvg.cm*
 %{_libdir}/ocaml/lablgtk2/liblablrsvg.a
 %{_libdir}/ocaml/site-lib/lablrsvg
