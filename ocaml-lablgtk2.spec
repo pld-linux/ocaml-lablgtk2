@@ -1,11 +1,11 @@
 #
 # Conditional build:
-%bcond_without	opengl	# without lablgtkgl
-%bcond_without	glade	# without lablgtkglade
-%bcond_without	gnome	# with lablgtkgnome (incompatible with GNOME 3)
+%bcond_without	opengl		# without lablgtkgl
+%bcond_without	glade		# without lablgtkglade
+%bcond_without	gnome		# with lablgtkgnome (incompatible with GNOME 3)
 %bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
 #
-%ifarch x32
+%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9 
 # not yet available on x32 (ocaml 4.02.1), remove when upstream will support it
 %undefine	with_ocaml_opt
 %endif
@@ -15,7 +15,7 @@ Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.18.3
-Release:	2
+Release:	3
 License:	LGPL with linking exceptions
 Group:		Libraries
 #Source0Download: http://lablgtk.forge.ocamlcore.org/
