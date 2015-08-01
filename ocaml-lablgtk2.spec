@@ -5,8 +5,8 @@
 %bcond_without	gnome		# with lablgtkgnome (incompatible with GNOME 3)
 %bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
 #
+# not yet available on x32 (ocaml 4.02.1), update when upstream will support it
 %ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9 
-# not yet available on x32 (ocaml 4.02.1), remove when upstream will support it
 %undefine	with_ocaml_opt
 %endif
 
@@ -15,7 +15,7 @@ Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.18.3
-Release:	3
+Release:	4
 License:	LGPL with linking exceptions
 Group:		Libraries
 #Source0Download: http://lablgtk.forge.ocamlcore.org/
@@ -309,7 +309,7 @@ lablgtk.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{stublibs,site-lib/labl{gtk2,gnomecanvas,glade,gtkgl,gtkspell,rsvg}},%{_examplesdir}/%{name}-%{version}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{stublibs,site-lib/lablgtk2},%{_examplesdir}/%{name}-%{version}}
 
 %{__make} old-install \
 	INSTALLDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2 \
@@ -324,28 +324,8 @@ cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 gzip -9nf $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.mli
 mv $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.gz .
 
-# make METAs for findlib
-cat > $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/lablgtk2/META <<EOF
-# Specifications for the "lablgtk2" library:
-requires = ""
-version = "%{version}"
-directory = "+lablgtk2"
-archive(byte) = "lablgtk.cma gtkInit.cmo"
-archive(native) = "lablgtk.cmxa gtkInit.cmx"
-linkopts = ""
-EOF
-
-for f in glade %{?with_gnome:gnomecanvas} gtkgl gtkspell rsvg ; do
-cat > $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/labl$f/META <<EOF
-# Specifications for the "lablgtk" library:
-requires = "lablgtk2"
-version = "%{version}"
-directory = "+lablgtk2"
-archive(byte) = "labl$f.cma"
-archive(native) = "labl$f.cmxa"
-linkopts = ""
-EOF
-done
+%{__sed} -i -e '3adirectory = "+lablgtk2"' $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/META
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/META $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/lablgtk2/META
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -354,28 +334,51 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES COPYING README
 %dir %{_libdir}/ocaml/lablgtk2
+%{_libdir}/ocaml/lablgtk2/lablgtk.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtk.cmxs
+%endif
+%{_libdir}/ocaml/site-lib/lablgtk2
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtk2.so
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gdk_pixbuf_mlsource
-%{_libdir}/ocaml/lablgtk2/g[ABCDEFLMOPRTUW]*.cm*
-%{_libdir}/ocaml/lablgtk2/gaux.cm*
-%{_libdir}/ocaml/lablgtk2/gdk*.cm*
-%{_libdir}/ocaml/lablgtk2/glib.cm*
-%{_libdir}/ocaml/lablgtk2/gobject.cm*
-%{_libdir}/ocaml/lablgtk2/gpointer.cm*
-%{_libdir}/ocaml/lablgtk2/gtk.cm*
-%{_libdir}/ocaml/lablgtk2/gtk[ABDEFILMNOPRTW]*.cm*
-%{_libdir}/ocaml/lablgtk2/gtkSignal.cm*
-%{_libdir}/ocaml/lablgtk2/gtkStock.cm*
-%{_libdir}/ocaml/lablgtk2/gutf8.cm*
-%{_libdir}/ocaml/lablgtk2/ogtk*.cm*
-%{_libdir}/ocaml/lablgtk2/pango*.cm*
+%{_libdir}/ocaml/lablgtk2/g[ABCDEFLMOPRTUW]*.cmi
+%{_libdir}/ocaml/lablgtk2/gaux.cmi
+%{_libdir}/ocaml/lablgtk2/gdk*.cmi
+%{_libdir}/ocaml/lablgtk2/glib.cmi
+%{_libdir}/ocaml/lablgtk2/gobject.cmi
+%{_libdir}/ocaml/lablgtk2/gpointer.cmi
+%{_libdir}/ocaml/lablgtk2/gtk.cmi
+%{_libdir}/ocaml/lablgtk2/gtk[ABDEFILMNOPRTW]*.cmi
+%{_libdir}/ocaml/lablgtk2/gtkSignal.cmi
+%{_libdir}/ocaml/lablgtk2/gtkStock.cmi
+%{_libdir}/ocaml/lablgtk2/gutf8.cmi
+%{_libdir}/ocaml/lablgtk2/ogtk*.cmi
+%{_libdir}/ocaml/lablgtk2/pango*.cmi
+%{_libdir}/ocaml/lablgtk2/gtkInit.cmo
+%{_libdir}/ocaml/lablgtk2/gtkThInit.cmo
+%{_libdir}/ocaml/lablgtk2/gtkThread.cmo
+%{_libdir}/ocaml/lablgtk2/liblablgtk2.a
 %if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/g[ABCDEFLMOPRTUW]*.cmx
+%{_libdir}/ocaml/lablgtk2/gaux.cmx
+%{_libdir}/ocaml/lablgtk2/gdk*.cmx
+%{_libdir}/ocaml/lablgtk2/glib.cmx
+%{_libdir}/ocaml/lablgtk2/gobject.cmx
+%{_libdir}/ocaml/lablgtk2/gpointer.cmx
+%{_libdir}/ocaml/lablgtk2/gtk.cmx
+%{_libdir}/ocaml/lablgtk2/gtk[ABDEFILMNOPRTW]*.cmx
+%{_libdir}/ocaml/lablgtk2/gtkSignal.cmx
+%{_libdir}/ocaml/lablgtk2/gtkStock.cmx
+%{_libdir}/ocaml/lablgtk2/gutf8.cmx
+%{_libdir}/ocaml/lablgtk2/ogtk*.cmx
+%{_libdir}/ocaml/lablgtk2/pango*.cmx
 %{_libdir}/ocaml/lablgtk2/gtkInit.o
 %{_libdir}/ocaml/lablgtk2/gtkThread.o
 %{_libdir}/ocaml/lablgtk2/lablgtk.a
+%{_libdir}/ocaml/lablgtk2/lablgtk.cmxa
 %endif
 %{_libdir}/ocaml/lablgtk2/gdk_tags.h
 %{_libdir}/ocaml/lablgtk2/gdkpixbuf_tags.h
@@ -388,129 +391,165 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/lablgtk2/pango_tags.h
 %{_libdir}/ocaml/lablgtk2/win32.h
 %{_libdir}/ocaml/lablgtk2/wrappers.h
-%{_libdir}/ocaml/lablgtk2/lablgtk.cm*
-%{_libdir}/ocaml/lablgtk2/liblablgtk2.a
 %attr(755,root,root) %{_libdir}/ocaml/lablgtk2/propcc
 %attr(755,root,root) %{_libdir}/ocaml/lablgtk2/varcc
-%{_libdir}/ocaml/site-lib/lablgtk2
 %{_examplesdir}/%{name}-%{version}
 
 %if %{with opengl}
 %files gl
 %defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablgtkgl.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtkgl.cmxs
+%endif
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtkgl2.so
 
 %files gl-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/glGtk.cm*
-%{_libdir}/ocaml/lablgtk2/gtkgl_tags.h
-%if %{with ocaml_opt}
-%{_libdir}/ocaml/lablgtk2/lablgtkgl.a
-%endif
-%{_libdir}/ocaml/lablgtk2/lablgtkgl.cm*
+%{_libdir}/ocaml/lablgtk2/glGtk.cmi
 %{_libdir}/ocaml/lablgtk2/liblablgtkgl2.a
-%{_libdir}/ocaml/site-lib/lablgtkgl
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/glGtk.cmx
+%{_libdir}/ocaml/lablgtk2/lablgtkgl.a
+%{_libdir}/ocaml/lablgtk2/lablgtkgl.cmxa
+%endif
+%{_libdir}/ocaml/lablgtk2/gtkgl_tags.h
 %endif
 
 %if %{with glade}
 %files glade
 %defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablglade.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablglade.cmxs
+%endif
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablglade2.so
 
 %files glade-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lablgladecc2
-%{_libdir}/ocaml/lablgtk2/glade.cm*
-%if %{with ocaml_opt}
-%{_libdir}/ocaml/lablgtk2/lablglade.a
-%endif
-%{_libdir}/ocaml/lablgtk2/lablglade.cm*
+%{_libdir}/ocaml/lablgtk2/glade.cmi
 %{_libdir}/ocaml/lablgtk2/liblablglade2.a
-%{_libdir}/ocaml/site-lib/lablglade
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/glade.cmx
+%{_libdir}/ocaml/lablgtk2/lablglade.a
+%{_libdir}/ocaml/lablgtk2/lablglade.cmxa
+%endif
 %endif
 
 %if %{with gnome}
 %files gnome
 %defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.cma
+%{_libdir}/ocaml/lablgtk2/lablgnomeui.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgnomecanvas.cmxs
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgnomeui.cmxs
+%endif
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomecanvas.so
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgnomeui.so
 
 %files gnome-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/gnoCanvas*.cm*
-%{_libdir}/ocaml/lablgtk2/gnoDruid.cm*
-%{_libdir}/ocaml/lablgtk2/gnomeCanvas*.cm*
-%{_libdir}/ocaml/lablgtk2/gnomeDruid.cm*
-%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.cm*
-%if %{with ocaml_opt}
-%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.a
-%{_libdir}/ocaml/lablgtk2/lablgnomeui.a
-%endif
-%{_libdir}/ocaml/lablgtk2/lablgnomeui.cm*
+%{_libdir}/ocaml/lablgtk2/gnoCanvas*.cmi
+%{_libdir}/ocaml/lablgtk2/gnoDruid.cmi
+%{_libdir}/ocaml/lablgtk2/gnomeCanvas*.cmi
+%{_libdir}/ocaml/lablgtk2/gnomeDruid.cmi
 %{_libdir}/ocaml/lablgtk2/liblablgnomecanvas.a
 %{_libdir}/ocaml/lablgtk2/liblablgnomeui.a
-%{_libdir}/ocaml/site-lib/lablgnomecanvas
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/gnoCanvas*.cmx
+%{_libdir}/ocaml/lablgtk2/gnoDruid.cmx
+%{_libdir}/ocaml/lablgtk2/gnomeCanvas*.cmx
+%{_libdir}/ocaml/lablgtk2/gnomeDruid.cmx
+%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.a
+%{_libdir}/ocaml/lablgtk2/lablgnomecanvas.cmxa
+%{_libdir}/ocaml/lablgtk2/lablgnomeui.a
+%{_libdir}/ocaml/lablgtk2/lablgnomeui.cmxa
+%endif
 %endif
 
 %files gtkspell
 %defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablgtkspell.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtkspell.cmxs
+%endif
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtkspell.so
 
 %files gtkspell-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/gtkSpell.cm*
-%if %{with ocaml_opt}
-%{_libdir}/ocaml/lablgtk2/lablgtkspell.a
-%endif
-%{_libdir}/ocaml/lablgtk2/lablgtkspell.cm*
+%{_libdir}/ocaml/lablgtk2/gtkSpell.cmi
 %{_libdir}/ocaml/lablgtk2/liblablgtkspell.a
-%{_libdir}/ocaml/site-lib/lablgtkspell
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/gtkSpell.cmx
+%{_libdir}/ocaml/lablgtk2/lablgtkspell.a
+%{_libdir}/ocaml/lablgtk2/lablgtkspell.cmxa
+%endif
 
 %files gtksourceview
 %defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtksourceview.cmxs
+%endif
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtksourceview.so
 
 %files gtksourceview-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/gSourceView.cm*
-%{_libdir}/ocaml/lablgtk2/gtkSourceView.cm*
-%{_libdir}/ocaml/lablgtk2/sourceViewEnums.cm*
-%{_libdir}/ocaml/lablgtk2/sourceView_tags.h
-%if %{with ocaml_opt}
-%{_libdir}/ocaml/lablgtk2/lablgtksourceview.a
-%endif
-%{_libdir}/ocaml/lablgtk2/lablgtksourceview.cm*
+%{_libdir}/ocaml/lablgtk2/gSourceView.cmi
+%{_libdir}/ocaml/lablgtk2/gtkSourceView.cmi
+%{_libdir}/ocaml/lablgtk2/sourceViewEnums.cmi
 %{_libdir}/ocaml/lablgtk2/liblablgtksourceview.a
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/gSourceView.cmx
+%{_libdir}/ocaml/lablgtk2/gtkSourceView.cmx
+%{_libdir}/ocaml/lablgtk2/sourceViewEnums.cmx
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview.a
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview.cmxa
+%endif
+%{_libdir}/ocaml/lablgtk2/sourceView_tags.h
 
 %files gtksourceview2
 %defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview2.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtksourceview2.cmxs
+%endif
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtksourceview2.so
 
 %files gtksourceview2-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/gSourceView2.cm*
-%{_libdir}/ocaml/lablgtk2/gtkSourceView2.cm*
-%{_libdir}/ocaml/lablgtk2/sourceView2Enums.cm*
-%{_libdir}/ocaml/lablgtk2/sourceView2_tags.h
-%if %{with ocaml_opt}
-%{_libdir}/ocaml/lablgtk2/lablgtksourceview2.a
-%endif
-%{_libdir}/ocaml/lablgtk2/lablgtksourceview2.cm*
+%{_libdir}/ocaml/lablgtk2/gSourceView2.cmi
+%{_libdir}/ocaml/lablgtk2/gtkSourceView2.cmi
+%{_libdir}/ocaml/lablgtk2/sourceView2Enums.cmi
 %{_libdir}/ocaml/lablgtk2/liblablgtksourceview2.a
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/gSourceView2.cmx
+%{_libdir}/ocaml/lablgtk2/gtkSourceView2.cmx
+%{_libdir}/ocaml/lablgtk2/sourceView2Enums.cmx
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview2.a
+%{_libdir}/ocaml/lablgtk2/lablgtksourceview2.cmxa
+%endif
+%{_libdir}/ocaml/lablgtk2/sourceView2_tags.h
 
 %files rsvg
 %defattr(644,root,root,755)
+%{_libdir}/ocaml/lablgtk2/lablrsvg.cma
+%if %{with ocaml_opt}
+%attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablrsvg.cmxs
+%endif
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablrsvg.so
 
 %files rsvg-devel
 %defattr(644,root,root,755)
-%{_libdir}/ocaml/lablgtk2/rsvg.cm*
+%{_libdir}/ocaml/lablgtk2/rsvg.cmi
 %if %{with ocaml_opt}
+%{_libdir}/ocaml/lablgtk2/rsvg.cmx
+%{_libdir}/ocaml/lablgtk2/lablrsvg.cmxa
 %{_libdir}/ocaml/lablgtk2/lablrsvg.a
 %endif
-%{_libdir}/ocaml/lablgtk2/lablrsvg.cm*
 %{_libdir}/ocaml/lablgtk2/liblablrsvg.a
-%{_libdir}/ocaml/site-lib/lablrsvg
 
 %files toplevel
 %defattr(644,root,root,755)
