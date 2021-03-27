@@ -15,7 +15,7 @@ Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.18.11
-Release:	1
+Release:	2
 License:	LGPL with linking exceptions
 Group:		Libraries
 Source0:	https://github.com/garrigue/lablgtk/archive/%{version}/lablgtk-%{version}.tar.gz
@@ -308,7 +308,7 @@ lablgtk.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{stublibs,site-lib/lablgtk2},%{_examplesdir}/%{name}-%{version}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/stublibs,%{_examplesdir}/%{name}-%{version}}
 
 %{__make} old-install \
 	INSTALLDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2 \
@@ -323,9 +323,6 @@ cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 gzip -9nf $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.mli
 mv $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.gz .
 
-%{__sed} -i -e '3adirectory = "+lablgtk2"' $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/META
-%{__mv} $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/META $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/lablgtk2/META
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -333,11 +330,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES COPYING README
 %dir %{_libdir}/ocaml/lablgtk2
+%{_libdir}/ocaml/lablgtk2/META
 %{_libdir}/ocaml/lablgtk2/lablgtk.cma
 %if %{with ocaml_opt}
 %attr(755,root,root) %{_libdir}/ocaml/lablgtk2/lablgtk.cmxs
 %endif
-%{_libdir}/ocaml/site-lib/lablgtk2
 %attr(755,root,root) %{_libdir}/ocaml/stublibs/dlllablgtk2.so
 
 %files devel
