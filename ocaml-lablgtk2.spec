@@ -15,7 +15,7 @@ Summary:	GTK+ binding for OCaml
 Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla
 Name:		ocaml-lablgtk2
 Version:	2.18.11
-Release:	2
+Release:	3
 License:	LGPL with linking exceptions
 Group:		Libraries
 Source0:	https://github.com/garrigue/lablgtk/archive/%{version}/lablgtk-%{version}.tar.gz
@@ -36,6 +36,8 @@ BuildRequires:	ocaml-camlp4 >= %{ocaml_ver}
 %{?with_opengl:BuildRequires:	ocaml-lablgl-devel >= 1.04}
 %requires_eq	ocaml-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_noautoreq	GtkSourceView_types GtkSourceView2_types
 
 %description
 GTK+ binding for OCaml. This package contains files needed to run
