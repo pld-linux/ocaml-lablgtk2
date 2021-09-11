@@ -1,12 +1,12 @@
 #
 # Conditional build:
-%bcond_without	opengl		# without lablgtkgl
-%bcond_without	glade		# without lablgtkglade
-%bcond_without	gnome		# with lablgtkgnome (incompatible with GNOME 3)
-%bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
+%bcond_without	opengl		# lablgtkgl library
+%bcond_without	glade		# lablgtkglade library
+%bcond_without	gnome		# lablgtkgnome library (incompatible with GNOME 3)
+%bcond_without	ocaml_opt	# native optimized binaries (bytecode is always built)
 #
 # not yet available on x32 (ocaml 4.02.1), update when upstream will support it
-%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9 
+%ifnarch %{ix86} %{x8664} %{arm} aarch64 ppc sparc sparcv9
 %undefine	with_ocaml_opt
 %endif
 
@@ -18,9 +18,10 @@ Version:	2.18.11
 Release:	3
 License:	LGPL with linking exceptions
 Group:		Libraries
+#Source0Download: https://github.com/garrigue/lablgtk/releases
 Source0:	https://github.com/garrigue/lablgtk/archive/%{version}/lablgtk-%{version}.tar.gz
 # Source0-md5:	a21a5b52bfd8de0fad705e67817750ef
-URL:		http://lablgtk.forge.ocamlcore.org/
+URL:		https://github.com/garrigue/lablgtk
 BuildRequires:	gtk+2-devel >= 2:2.10.0
 %{?with_opengl:BuildRequires:	gtkglarea-devel >= 1.99}
 BuildRequires:	gtkspell-devel >= 2.0
@@ -323,7 +324,7 @@ cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 # .mli files stay, they are the only documentation, but .ml go
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.ml
 gzip -9nf $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.mli
-mv $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.gz .
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/ocaml/lablgtk2/*.gz .
 
 %clean
 rm -rf $RPM_BUILD_ROOT
