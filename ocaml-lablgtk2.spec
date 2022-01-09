@@ -51,7 +51,7 @@ uruchamiania programów używających LablGtk.
 
 %package devel
 Summary:	GTK+ binding for OCaml - development part
-Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla - cześć programistyczna
+Summary(pl.UTF-8):	Wiązania GTK+ dla OCamla - część programistyczna
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
